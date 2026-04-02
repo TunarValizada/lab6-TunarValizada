@@ -4,10 +4,27 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.UuidGenerator;
+
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @UuidGenerator
+    @Column(name = "id", nullable = false, columnDefinition = "uuid")
     private UUID id;
+
+    @Column(name = "product_name", nullable = false)
     private String productName;
+
+    @Column(name = "price")
     private BigDecimal price;
+
+    @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
     // Constructors
@@ -15,7 +32,6 @@ public class Product {
     }
 
     public Product(String productName, BigDecimal price, LocalDate expirationDate) {
-        this.id = UUID.randomUUID();
         this.productName = productName;
         this.price = price;
         this.expirationDate = expirationDate;
